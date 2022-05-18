@@ -1,5 +1,5 @@
 # create a builder container for qt5
-FROM ubuntu:20.04 AS qt5builder
+FROM ubuntu:20.04
 
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -35,22 +35,3 @@ RUN git checkout 5.15
 RUN ./init-repository
 RUN ./configure -prefix $PWD/qtbase -nomake tests -nomake examples -opensource -confirm-license
 RUN make -j $(nproc)
-
-# main builder for musescore, uses the qt builder
-FROM ubuntu:20.04
-ENV TZ=Europe/Paris
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-RUN apt-get update
-RUN apt-get -y upgrade
-
-RUN apt-get -y install libsndfile-dev
-
-
-RUN mkdir -p /src
-COPY --from=qt5builder /src/qt5 /src
-
-WORKDIR /src
-RUN git clone https://github.com/musescore/MuseScore.git
-WORKDIR /src/MuseScore
-RUN QTDIR=/qt5/qtbase cmake -P build.cmake -DCMAKE_BUILD_TYPE=Release

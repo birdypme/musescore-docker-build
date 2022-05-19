@@ -7,6 +7,6 @@ RUN apt-get update
 RUN apt-get -y upgrade
 
 RUN apt-get -y install libsndfile-dev git cmake ninja-build gperf g++ python3 \
-    libpulse-dev libasound2-dev libglib2.0-dev libgl1-mesa-dev libpng16-16
+    libpulse-dev libasound2-dev libglib2.0-dev libgl1-mesa-dev libpng16-16 gdb
 
 ENV QTDIR=/src/qt5/qtbase

@@ -28,10 +28,11 @@ RUN apt-get -y install git
 RUN apt-get -y autoremove
 RUN mkdir -p /src
 
+ARG USER
+ENV USER=${USER}
+ARG USERID
+ENV USERID=${USERID}
+RUN useradd -u ${USERID} ${USER}
+USER ${USER}
+
 WORKDIR /src
-RUN git clone https://github.com/qt/qt5
-WORKDIR /src/qt5
-RUN git checkout 5.15
-RUN ./init-repository
-RUN ./configure -prefix $PWD/qtbase -nomake tests -nomake examples -opensource -confirm-license
-RUN make -j $(nproc)

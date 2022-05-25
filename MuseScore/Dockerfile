@@ -17,4 +17,5 @@ RUN useradd -u ${USERID} ${USER}
 USER ${USER}
 
 ENV QTDIR=/src/qt5/qtbase
+ENV LD_LIBRARY_PATH=/src/qt5/qtbase/lib:${LD_LIBRARY_PATH}
 WORKDIR /src

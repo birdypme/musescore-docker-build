@@ -18,7 +18,7 @@ docker rmi qt5
 
 ```bash
 docker build ./MuseScore --build-arg USER=$USER --build-arg USERID=$(id -u) -t msbuild:latest
-docker run -it --rm -v $(pwd)/src:/src/ $(pwd)/MuseScore:/build msbuild /bin/bash /build/build.sh
+docker run -it --rm -v $(pwd)/src:/src/ -v $(pwd)/MuseScore:/build msbuild /bin/bash /build/build.sh
 ```
 
 # Notes

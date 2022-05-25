@@ -9,4 +9,12 @@ RUN apt-get -y upgrade
 RUN apt-get -y install libsndfile-dev git cmake ninja-build gperf g++ python3 \
     libpulse-dev libasound2-dev libglib2.0-dev libgl1-mesa-dev libpng16-16 gdb
 
+ARG USER
+ENV USER=${USER}
+ARG USERID
+ENV USERID=${USERID}
+RUN useradd -u ${USERID} ${USER}
+USER ${USER}
+
 ENV QTDIR=/src/qt5/qtbase
+WORKDIR /src

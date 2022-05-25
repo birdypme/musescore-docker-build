@@ -8,7 +8,7 @@ This Dockerfile creates a container where Qt5 can be compiled (on a recent Ubunt
 
 Creates the docker image, run the build, and copy the qt5 result files locally.
 
-```︃bash
+```bash
 docker build ./qt5 --build-arg USER=$USER --build-arg USERID=$(id -u) -t qt5:latest
 docker run -it --rm -v $(pwd)/src:/src/ -v $(pwd)/qt5:/build qt5 /bin/bash /build/build.sh
 docker rmi qt5

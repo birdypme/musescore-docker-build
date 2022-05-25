@@ -33,6 +33,7 @@ ENV USER=${USER}
 ARG USERID
 ENV USERID=${USERID}
 RUN useradd -u ${USERID} ${USER}
+RUN chown -R ${USER}:${USER} /src
 USER ${USER}
 
 WORKDIR /src
